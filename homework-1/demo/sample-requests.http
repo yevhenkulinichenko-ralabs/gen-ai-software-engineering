@@ -1,0 +1,321 @@
+### Banking Transactions API — Sample Requests
+### Compatible with: VS Code REST Client, JetBrains HTTP Client
+### Start the app first: bash demo/run-docker.sh  (or run-local.sh)
+
+@baseUrl = http://localhost:8080
+
+
+### ==============================================================
+### CREATE TRANSACTIONS
+### ==============================================================
+
+### 1. Deposit — fund ACC-12345 with USD
+# @name deposit1
+POST {{baseUrl}}/transactions
+Content-Type: application/json
+
+{
+  "fromAccount": "ACC-EXT01",
+  "toAccount": "ACC-12345",
+  "amount": 1500.00,
+  "currency": "USD",
+  "type": "deposit",
+  "status": "completed"
+}
+
+### 2. Deposit — fund ACC-67890 with EUR
+# @name deposit2
+POST {{baseUrl}}/transactions
+Content-Type: application/json
+
+{
+  "fromAccount": "ACC-EXT02",
+  "toAccount": "ACC-67890",
+  "amount": 800.50,
+  "currency": "EUR",
+  "type": "deposit",
+  "status": "completed"
+}
+
+### 3. Deposit — fund ACC-ABCDE with JPY
+POST {{baseUrl}}/transactions
+Content-Type: application/json
+
+{
+  "fromAccount": "ACC-EXT03",
+  "toAccount": "ACC-ABCDE",
+  "amount": 150000.00,
+  "currency": "JPY",
+  "type": "deposit",
+  "status": "completed"
+}
+
+### 4. Transfer from ACC-12345 to ACC-67890 in GBP
+# @name transfer1
+POST {{baseUrl}}/transactions
+Content-Type: application/json
+
+{
+  "fromAccount": "ACC-12345",
+  "toAccount": "ACC-67890",
+  "amount": 175.00,
+  "currency": "GBP",
+  "type": "transfer",
+  "status": "completed"
+}
+
+### 5. Transfer from ACC-67890 to ACC-ABCDE in SGD
+POST {{baseUrl}}/transactions
+Content-Type: application/json
+
+{
+  "fromAccount": "ACC-67890",
+  "toAccount": "ACC-ABCDE",
+  "amount": 320.00,
+  "currency": "SGD",
+  "type": "transfer",
+  "status": "completed"
+}
+
+### 6. Withdrawal from ACC-12345 in CAD
+# @name withdrawal1
+POST {{baseUrl}}/transactions
+Content-Type: application/json
+
+{
+  "fromAccount": "ACC-12345",
+  "toAccount": "ACC-EXT01",
+  "amount": 200.00,
+  "currency": "CAD",
+  "type": "withdrawal",
+  "status": "completed"
+}
+
+### 7. Withdrawal from ACC-ABCDE in JPY
+POST {{baseUrl}}/transactions
+Content-Type: application/json
+
+{
+  "fromAccount": "ACC-ABCDE",
+  "toAccount": "ACC-EXT03",
+  "amount": 25000.00,
+  "currency": "JPY",
+  "type": "withdrawal",
+  "status": "completed"
+}
+
+### 8. Pending transfer in CHF
+POST {{baseUrl}}/transactions
+Content-Type: application/json
+
+{
+  "fromAccount": "ACC-67890",
+  "toAccount": "ACC-12345",
+  "amount": 90.00,
+  "currency": "CHF",
+  "type": "transfer",
+  "status": "pending"
+}
+
+### 9. Failed withdrawal in AUD
+POST {{baseUrl}}/transactions
+Content-Type: application/json
+
+{
+  "fromAccount": "ACC-12345",
+  "toAccount": "ACC-EXT04",
+  "amount": 500.00,
+  "currency": "AUD",
+  "type": "withdrawal",
+  "status": "failed"
+}
+
+
+### ==============================================================
+### GET ALL TRANSACTIONS — no filters
+### ==============================================================
+
+### 10. List all transactions
+GET {{baseUrl}}/transactions
+
+
+### ==============================================================
+### GET TRANSACTIONS — filters
+### ==============================================================
+
+### 11. Filter by accountId — all transactions touching ACC-12345
+GET {{baseUrl}}/transactions?accountId=ACC-12345
+
+### 12. Filter by type — all transfers
+GET {{baseUrl}}/transactions?type=transfer
+
+### 13. Filter by type — all deposits
+GET {{baseUrl}}/transactions?type=deposit
+
+### 14. Filter by date range (adjust dates to today's date)
+GET {{baseUrl}}/transactions?from=2026-01-01&to=2026-12-31
+
+### 15. Combined filters — transfers for ACC-12345 in date range
+GET {{baseUrl}}/transactions?accountId=ACC-12345&type=transfer&from=2026-01-01&to=2026-12-31
+
+
+### ==============================================================
+### GET TRANSACTION BY ID
+### ==============================================================
+
+### 16. Get transaction by ID — replace <id> with an id from responses above
+GET {{baseUrl}}/transactions/<id>
+
+### 17. Get transaction — non-existent ID (expect 404)
+GET {{baseUrl}}/transactions/00000000-0000-0000-0000-000000000000
+
+
+### ==============================================================
+### ACCOUNT BALANCE — with currency conversion
+### ==============================================================
+
+### 18. Balance for ACC-12345 in USD (default)
+GET {{baseUrl}}/accounts/ACC-12345/balance
+
+### 19. Balance for ACC-12345 converted to EUR
+GET {{baseUrl}}/accounts/ACC-12345/balance?currency=EUR
+
+### 20. Balance for ACC-12345 converted to JPY
+GET {{baseUrl}}/accounts/ACC-12345/balance?currency=JPY
+
+### 21. Balance for ACC-67890 in USD (default)
+GET {{baseUrl}}/accounts/ACC-67890/balance
+
+### 22. Balance for ACC-67890 converted to GBP
+GET {{baseUrl}}/accounts/ACC-67890/balance?currency=GBP
+
+### 23. Balance for ACC-ABCDE in JPY (native currency)
+GET {{baseUrl}}/accounts/ACC-ABCDE/balance?currency=JPY
+
+### 24. Balance for ACC-ABCDE converted to USD
+GET {{baseUrl}}/accounts/ACC-ABCDE/balance?currency=USD
+
+### 25. Balance — unsupported conversion currency (expect 400)
+GET {{baseUrl}}/accounts/ACC-12345/balance?currency=XYZ
+
+### 26. Balance — non-existent account (expect 404)
+GET {{baseUrl}}/accounts/ACC-ZZZZZ/balance
+
+
+### ==============================================================
+### ACCOUNT SUMMARY
+### ==============================================================
+
+### 27. Summary for ACC-12345
+GET {{baseUrl}}/accounts/ACC-12345/summary
+
+### 28. Summary for ACC-67890
+GET {{baseUrl}}/accounts/ACC-67890/summary
+
+### 29. Summary for ACC-ABCDE
+GET {{baseUrl}}/accounts/ACC-ABCDE/summary
+
+### 30. Summary — non-existent account (expect 404)
+GET {{baseUrl}}/accounts/ACC-ZZZZZ/summary
+
+
+### ==============================================================
+### VALIDATION ERRORS
+### ==============================================================
+
+### 31. Missing all fields (expect 400 with full details list)
+POST {{baseUrl}}/transactions
+Content-Type: application/json
+
+{}
+
+### 32. Invalid amount — zero (expect 400)
+POST {{baseUrl}}/transactions
+Content-Type: application/json
+
+{
+  "fromAccount": "ACC-12345",
+  "toAccount": "ACC-67890",
+  "amount": 0,
+  "currency": "USD",
+  "type": "transfer",
+  "status": "completed"
+}
+
+### 33. Invalid amount — more than 2 decimal places (expect 400)
+POST {{baseUrl}}/transactions
+Content-Type: application/json
+
+{
+  "fromAccount": "ACC-12345",
+  "toAccount": "ACC-67890",
+  "amount": 10.999,
+  "currency": "EUR",
+  "type": "transfer",
+  "status": "completed"
+}
+
+### 34. Invalid account format (expect 400)
+POST {{baseUrl}}/transactions
+Content-Type: application/json
+
+{
+  "fromAccount": "INVALID",
+  "toAccount": "ACC-67890",
+  "amount": 100.00,
+  "currency": "GBP",
+  "type": "transfer",
+  "status": "completed"
+}
+
+### 35. Invalid currency code (expect 400)
+POST {{baseUrl}}/transactions
+Content-Type: application/json
+
+{
+  "fromAccount": "ACC-12345",
+  "toAccount": "ACC-67890",
+  "amount": 100.00,
+  "currency": "XXX",
+  "type": "transfer",
+  "status": "completed"
+}
+
+### 36. Invalid type (expect 400)
+POST {{baseUrl}}/transactions
+Content-Type: application/json
+
+{
+  "fromAccount": "ACC-12345",
+  "toAccount": "ACC-67890",
+  "amount": 100.00,
+  "currency": "JPY",
+  "type": "wire",
+  "status": "completed"
+}
+
+### 37. Invalid status (expect 400)
+POST {{baseUrl}}/transactions
+Content-Type: application/json
+
+{
+  "fromAccount": "ACC-12345",
+  "toAccount": "ACC-67890",
+  "amount": 100.00,
+  "currency": "CAD",
+  "type": "transfer",
+  "status": "processing"
+}
+
+### 38. Multiple validation errors at once (expect 400 with multiple details)
+POST {{baseUrl}}/transactions
+Content-Type: application/json
+
+{
+  "fromAccount": "BAD",
+  "toAccount": "ALSO-BAD",
+  "amount": -50,
+  "currency": "FAKE",
+  "type": "unknown",
+  "status": "nope"
+}
