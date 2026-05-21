@@ -1,5 +1,9 @@
 # Support Ticket API
 
+> **Student Name**: Yevhen Kulinichenko AAI02
+> **Date Submitted**: 13.05.2026
+> **AI Tools Used**: Claude Code
+
 A RESTful Express API for managing customer support tickets with keyword-based automatic classification, batch import, and in-memory storage.
 
 ## Features
