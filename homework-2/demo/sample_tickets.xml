@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tickets>
+  <ticket>
+    <customer_id>cust-001</customer_id>
+    <customer_email>alice.smith@example.com</customer_email>
+    <customer_name>Alice Smith</customer_name>
+    <subject>Cannot access account — locked out</subject>
+    <description>I have been locked out after several failed login attempts. The password reset email never arrived.</description>
+    <category>account_access</category>
+    <priority>urgent</priority>
+    <status>new</status>
+    <tags><tag>login</tag><tag>locked</tag></tags>
+    <metadata><source>web_form</source><browser>Chrome</browser><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>cust-002</customer_id>
+    <customer_email>bob.jones@example.com</customer_email>
+    <customer_name>Bob Jones</customer_name>
+    <subject>Application crashes on startup</subject>
+    <description>Every time I open the desktop app it crashes within seconds and shows an error in the console logs.</description>
+    <category>technical_issue</category>
+    <priority>high</priority>
+    <status>in_progress</status>
+    <tags><tag>crash</tag><tag>desktop</tag></tags>
+    <assigned_to>agent-05</assigned_to>
+    <metadata><source>email</source><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>cust-003</customer_id>
+    <customer_email>carol.white@example.com</customer_email>
+    <customer_name>Carol White</customer_name>
+    <subject>Invoice shows incorrect charge amount</subject>
+    <description>My invoice shows $149 but my plan is $99 per month. I never upgraded. Please refund the difference.</description>
+    <category>billing_question</category>
+    <priority>medium</priority>
+    <status>waiting_customer</status>
+    <tags><tag>invoice</tag><tag>refund</tag></tags>
+    <assigned_to>agent-02</assigned_to>
+    <metadata><source>chat</source><browser>Firefox</browser><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>cust-004</customer_id>
+    <customer_email>dan.green@example.com</customer_email>
+    <customer_name>Dan Green</customer_name>
+    <subject>Request: add dark mode to the web app</subject>
+    <description>I work late evenings and the bright interface strains my eyes. A dark mode toggle would be a great improvement.</description>
+    <category>feature_request</category>
+    <priority>low</priority>
+    <status>new</status>
+    <tags><tag>ui</tag><tag>dark-mode</tag></tags>
+    <metadata><source>api</source><browser>Safari</browser><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>cust-005</customer_id>
+    <customer_email>eva.brown@example.com</customer_email>
+    <customer_name>Eva Brown</customer_name>
+    <subject>Checkout fails with payment error on last step</subject>
+    <description>Defect in checkout flow. Steps to reproduce: add item to cart, proceed to payment, click Pay. Actual behavior: payment failed error. Expected: order completes.</description>
+    <category>bug_report</category>
+    <priority>high</priority>
+    <status>in_progress</status>
+    <tags><tag>checkout</tag><tag>payment</tag></tags>
+    <assigned_to>agent-03</assigned_to>
+    <metadata><source>web_form</source><browser>Chrome</browser><device_type>mobile</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>cust-006</customer_id>
+    <customer_email>frank.lee@example.com</customer_email>
+    <customer_name>Frank Lee</customer_name>
+    <subject>Two-factor authentication codes not arriving</subject>
+    <description>I enabled 2FA but SMS codes stopped arriving three days ago. I cannot sign in without the code.</description>
+    <category>account_access</category>
+    <priority>high</priority>
+    <status>new</status>
+    <tags><tag>2fa</tag><tag>sms</tag></tags>
+    <metadata><source>phone</source><device_type>mobile</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>cust-007</customer_id>
+    <customer_email>grace.kim@example.com</customer_email>
+    <customer_name>Grace Kim</customer_name>
+    <subject>Dashboard takes over 30 seconds to load</subject>
+    <description>Since the last update the dashboard is very slow. It takes between 30 and 60 seconds before any data appears on screen.</description>
+    <category>technical_issue</category>
+    <priority>medium</priority>
+    <status>new</status>
+    <tags><tag>performance</tag><tag>dashboard</tag></tags>
+    <metadata><source>email</source><browser>Edge</browser><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>cust-008</customer_id>
+    <customer_email>henry.p@example.com</customer_email>
+    <customer_name>Henry Park</customer_name>
+    <subject>Charged twice for the same subscription</subject>
+    <description>My bank shows two identical charges of $49.99 on the same day. Please refund the duplicate payment immediately.</description>
+    <category>billing_question</category>
+    <priority>high</priority>
+    <status>resolved</status>
+    <tags><tag>double-charge</tag><tag>refund</tag></tags>
+    <assigned_to>agent-01</assigned_to>
+    <resolved_at>2024-03-15T14:22:00.000Z</resolved_at>
+    <metadata><source>web_form</source><browser>Chrome</browser><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>cust-009</customer_id>
+    <customer_email>iris.nguyen@example.com</customer_email>
+    <customer_name>Iris Nguyen</customer_name>
+    <subject>Add CSV export for reports</subject>
+    <description>It would be very helpful to export monthly reports as CSV files for use in Excel. Currently only PDF export is available.</description>
+    <category>feature_request</category>
+    <priority>medium</priority>
+    <status>new</status>
+    <tags><tag>export</tag><tag>csv</tag></tags>
+    <metadata><source>api</source><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>cust-010</customer_id>
+    <customer_email>jack.m@example.com</customer_email>
+    <customer_name>Jack Murphy</customer_name>
+    <subject>Search returns no results for valid queries</subject>
+    <description>Defect: search returns zero results for terms that definitely exist. Regression introduced in last week's release. Steps to reproduce: search for any known product name.</description>
+    <category>bug_report</category>
+    <priority>medium</priority>
+    <status>in_progress</status>
+    <tags><tag>search</tag><tag>regression</tag></tags>
+    <assigned_to>agent-04</assigned_to>
+    <metadata><source>web_form</source><browser>Firefox</browser><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>cust-011</customer_id>
+    <customer_email>kate.r@example.com</customer_email>
+    <customer_name>Kate Robinson</customer_name>
+    <subject>General feedback on the new UI redesign</subject>
+    <description>The redesign looks good overall but the new navigation bar is a bit confusing. A short onboarding tooltip would help new users get oriented.</description>
+    <category>other</category>
+    <priority>low</priority>
+    <status>closed</status>
+    <resolved_at>2024-02-28T09:00:00.000Z</resolved_at>
+    <metadata><source>email</source><browser>Safari</browser><device_type>tablet</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>cust-012</customer_id>
+    <customer_email>liam.c@example.com</customer_email>
+    <customer_name>Liam Chen</customer_name>
+    <subject>Critical: production API is down for all users</subject>
+    <description>Production is down. The API is returning 503 errors for all endpoints since 09:15 UTC. Critical outage affecting all of our customers. Need immediate response.</description>
+    <category>technical_issue</category>
+    <priority>urgent</priority>
+    <status>resolved</status>
+    <tags><tag>outage</tag><tag>critical</tag></tags>
+    <assigned_to>agent-01</assigned_to>
+    <resolved_at>2024-04-02T11:30:00.000Z</resolved_at>
+    <metadata><source>phone</source><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>cust-013</customer_id>
+    <customer_email>mia.d@example.com</customer_email>
+    <customer_name>Mia Davies</customer_name>
+    <subject>What features are included in the Pro plan?</subject>
+    <description>I am considering upgrading but cannot find a clear comparison between Basic and Pro on the pricing page. Please send a detailed breakdown of included features.</description>
+    <category>billing_question</category>
+    <priority>low</priority>
+    <status>closed</status>
+    <assigned_to>agent-02</assigned_to>
+    <resolved_at>2024-03-20T16:00:00.000Z</resolved_at>
+    <metadata><source>chat</source><browser>Chrome</browser><device_type>mobile</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>cust-014</customer_id>
+    <customer_email>noah.w@example.com</customer_email>
+    <customer_name>Noah Wilson</customer_name>
+    <subject>Request: native mobile app for iOS and Android</subject>
+    <description>The mobile website works but a native app would significantly improve the experience. We need push notifications and offline access for field teams.</description>
+    <category>feature_request</category>
+    <priority>medium</priority>
+    <status>new</status>
+    <tags><tag>mobile</tag><tag>ios</tag><tag>android</tag></tags>
+    <metadata><source>api</source><device_type>mobile</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>cust-015</customer_id>
+    <customer_email>olivia.t@example.com</customer_email>
+    <customer_name>Olivia Taylor</customer_name>
+    <subject>User notification settings reset on every page refresh</subject>
+    <description>Defect: notification preferences revert to defaults on every page reload. Steps: go to Settings, change notifications, refresh. Expected: settings persist. Actual: all settings reset.</description>
+    <category>bug_report</category>
+    <priority>high</priority>
+    <status>in_progress</status>
+    <tags><tag>settings</tag><tag>persistence</tag></tags>
+    <assigned_to>agent-03</assigned_to>
+    <metadata><source>web_form</source><browser>Chrome</browser><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>cust-016</customer_id>
+    <customer_email>peter.h@example.com</customer_email>
+    <customer_name>Peter Hall</customer_name>
+    <subject>Forgot username — cannot log in to my account</subject>
+    <description>I cannot remember my username from when I registered a year ago. The login page only accepts usernames not email. How can I recover it?</description>
+    <category>account_access</category>
+    <priority>medium</priority>
+    <status>resolved</status>
+    <assigned_to>agent-05</assigned_to>
+    <resolved_at>2024-03-05T10:45:00.000Z</resolved_at>
+    <metadata><source>email</source><browser>Firefox</browser><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>cust-017</customer_id>
+    <customer_email>quinn.a@example.com</customer_email>
+    <customer_name>Quinn Adams</customer_name>
+    <subject>Webhook integration throwing timeout errors</subject>
+    <description>Our webhook integration has been failing with timeout errors for 48 hours. Our endpoint responds in under 200ms. The issue appears to be on your infrastructure side.</description>
+    <category>technical_issue</category>
+    <priority>high</priority>
+    <status>waiting_customer</status>
+    <tags><tag>webhook</tag><tag>timeout</tag></tags>
+    <assigned_to>agent-04</assigned_to>
+    <metadata><source>api</source><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>cust-018</customer_id>
+    <customer_email>rachel.b@example.com</customer_email>
+    <customer_name>Rachel Burns</customer_name>
+    <subject>How do I cancel my monthly subscription?</subject>
+    <description>I would like to cancel at the end of the current billing period but cannot find a cancellation option in my account settings. Please guide me through the process.</description>
+    <category>billing_question</category>
+    <priority>medium</priority>
+    <status>resolved</status>
+    <assigned_to>agent-02</assigned_to>
+    <resolved_at>2024-04-10T13:00:00.000Z</resolved_at>
+    <metadata><source>chat</source><browser>Safari</browser><device_type>mobile</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>cust-019</customer_id>
+    <customer_email>sam.f@example.com</customer_email>
+    <customer_name>Sam Foster</customer_name>
+    <subject>Request: bulk delete for old records</subject>
+    <description>Deleting records one by one is not practical when we have thousands. A bulk-select and delete feature would save our operations team hours of work each month.</description>
+    <category>feature_request</category>
+    <priority>medium</priority>
+    <status>new</status>
+    <tags><tag>bulk-action</tag><tag>records</tag></tags>
+    <metadata><source>email</source><browser>Chrome</browser><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>cust-020</customer_id>
+    <customer_email>tina.m@example.com</customer_email>
+    <customer_name>Tina Morris</customer_name>
+    <subject>GDPR request: delete my account and personal data</subject>
+    <description>Please delete my account and all associated personal data under GDPR Article 17. Confirm the process and the expected timeline for complete data removal.</description>
+    <category>other</category>
+    <priority>medium</priority>
+    <status>in_progress</status>
+    <tags><tag>gdpr</tag><tag>privacy</tag></tags>
+    <assigned_to>agent-01</assigned_to>
+    <metadata><source>email</source><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>cust-021</customer_id>
+    <customer_email>uma.p@example.com</customer_email>
+    <customer_name>Uma Patel</customer_name>
+    <subject>Security alert: unauthorised login detected on my account</subject>
+    <description>I received a security alert about a login from an unrecognised device and location. Please help me secure my account and review recent access logs.</description>
+    <category>account_access</category>
+    <priority>urgent</priority>
+    <status>in_progress</status>
+    <tags><tag>security</tag><tag>unauthorized</tag></tags>
+    <assigned_to>agent-01</assigned_to>
+    <metadata><source>web_form</source><browser>Chrome</browser><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>cust-022</customer_id>
+    <customer_email>victor.o@example.com</customer_email>
+    <customer_name>Victor Osei</customer_name>
+    <subject>API rate limit errors blocking our production integration</subject>
+    <description>Our integration keeps hitting rate limits even though we are well within the documented thresholds. This is blocking production traffic and affecting our customers.</description>
+    <category>technical_issue</category>
+    <priority>high</priority>
+    <status>new</status>
+    <tags><tag>api</tag><tag>rate-limit</tag></tags>
+    <metadata><source>api</source><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>cust-023</customer_id>
+    <customer_email>wendy.sz@example.com</customer_email>
+    <customer_name>Wendy Sz</customer_name>
+    <subject>Requesting refund for annual plan purchased by mistake</subject>
+    <description>I accidentally purchased an annual plan instead of monthly and need a full refund. I noticed the error immediately and have not used any features on the new plan.</description>
+    <category>billing_question</category>
+    <priority>high</priority>
+    <status>new</status>
+    <tags><tag>refund</tag><tag>annual</tag></tags>
+    <metadata><source>web_form</source><browser>Chrome</browser><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>cust-024</customer_id>
+    <customer_email>xander.b@example.com</customer_email>
+    <customer_name>Xander Blake</customer_name>
+    <subject>Add keyboard shortcuts for power users</subject>
+    <description>Please add keyboard shortcuts for frequently used actions such as creating a new ticket, navigating between views, and submitting forms. Power users rely on keyboard navigation.</description>
+    <category>feature_request</category>
+    <priority>low</priority>
+    <status>new</status>
+    <tags><tag>keyboard</tag><tag>accessibility</tag></tags>
+    <metadata><source>email</source><browser>Firefox</browser><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>cust-025</customer_id>
+    <customer_email>yasmin.r@example.com</customer_email>
+    <customer_name>Yasmin Rios</customer_name>
+    <subject>File upload fails silently for files over 5MB</subject>
+    <description>Defect: uploading files larger than 5MB fails with no error message shown to the user. The upload spinner disappears and nothing happens. The file size limit should be communicated clearly.</description>
+    <category>bug_report</category>
+    <priority>medium</priority>
+    <status>new</status>
+    <tags><tag>upload</tag><tag>file-size</tag></tags>
+    <metadata><source>web_form</source><browser>Chrome</browser><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>cust-026</customer_id>
+    <customer_email>zoe.h@example.com</customer_email>
+    <customer_name>Zoe Hughes</customer_name>
+    <subject>Cannot change primary email address in profile settings</subject>
+    <description>The profile settings page shows an email field but saving changes does nothing. The email address does not update and there is no error message.</description>
+    <category>account_access</category>
+    <priority>medium</priority>
+    <status>in_progress</status>
+    <tags><tag>email</tag><tag>profile</tag></tags>
+    <assigned_to>agent-05</assigned_to>
+    <metadata><source>web_form</source><browser>Safari</browser><device_type>mobile</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>cust-027</customer_id>
+    <customer_email>aaron.f@example.com</customer_email>
+    <customer_name>Aaron Flores</customer_name>
+    <subject>Memory leak causes browser tab to crash after 20 minutes</subject>
+    <description>After using the app for about 20 minutes the browser tab starts consuming excessive memory and eventually crashes. Reproducible on Chrome and Firefox on different machines.</description>
+    <category>technical_issue</category>
+    <priority>high</priority>
+    <status>in_progress</status>
+    <tags><tag>memory-leak</tag><tag>crash</tag></tags>
+    <assigned_to>agent-03</assigned_to>
+    <metadata><source>email</source><browser>Chrome</browser><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>cust-028</customer_id>
+    <customer_email>bella.c@example.com</customer_email>
+    <customer_name>Bella Cruz</customer_name>
+    <subject>Promo code SAVE20 not applying discount at checkout</subject>
+    <description>I applied the promo code SAVE20 at checkout but the 20% discount was not applied and I was charged the full price. The code was advertised as valid until end of month.</description>
+    <category>billing_question</category>
+    <priority>medium</priority>
+    <status>resolved</status>
+    <tags><tag>promo-code</tag><tag>discount</tag></tags>
+    <assigned_to>agent-02</assigned_to>
+    <resolved_at>2024-04-18T11:00:00.000Z</resolved_at>
+    <metadata><source>chat</source><browser>Firefox</browser><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>cust-029</customer_id>
+    <customer_email>carlos.e@example.com</customer_email>
+    <customer_name>Carlos Evans</customer_name>
+    <subject>Request: add pagination to list API endpoints</subject>
+    <description>Please add page and limit parameters to the list endpoints. Without pagination large datasets cause browser timeouts and excessive memory usage in client applications.</description>
+    <category>feature_request</category>
+    <priority>high</priority>
+    <status>new</status>
+    <tags><tag>api</tag><tag>pagination</tag></tags>
+    <metadata><source>api</source><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>cust-030</customer_id>
+    <customer_email>diana.f@example.com</customer_email>
+    <customer_name>Diana Fisher</customer_name>
+    <subject>Report generation fails for date ranges over 90 days</subject>
+    <description>Defect: generating a report with a date range longer than 90 days throws a 500 server error. Steps to reproduce: set date range to 100 days, click Generate. Expected: report generated. Actual: server error.</description>
+    <category>bug_report</category>
+    <priority>high</priority>
+    <status>in_progress</status>
+    <tags><tag>reports</tag><tag>date-range</tag></tags>
+    <assigned_to>agent-04</assigned_to>
+    <metadata><source>web_form</source><browser>Chrome</browser><device_type>desktop</device_type></metadata>
+  </ticket>
+</tickets>

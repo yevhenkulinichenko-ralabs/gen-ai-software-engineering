@@ -1,0 +1,8 @@
+customer_id,customer_email,customer_name,subject,description,category,priority,status,tags,assigned_to,resolved_at,metadata_source,metadata_browser,metadata_device_type
+cust-valid,valid@example.com,Valid User,This record is valid,This is a valid ticket to confirm partial success reporting works correctly.,other,low,new,,,, api,,desktop
+cust-bad-email,not-an-email,Bad Email User,Invalid email address,This record has a malformed email address and should fail validation.,other,low,new,,,,api,,desktop
+cust-missing-subject,,Missing Subject User,,This record is missing both customer_email and subject fields and should fail.,technical_issue,medium,new,,,,web_form,,mobile
+cust-bad-category,user@example.com,Bad Category User,Invalid category value,This record uses a category not in the allowed enum and should fail validation.,not_a_valid_category,medium,new,,,,email,,desktop
+cust-bad-priority,user2@example.com,Bad Priority User,Invalid priority value,This record uses a priority not in the allowed enum and should fail validation.,other,super_urgent,new,,,,email,,tablet
+cust-bad-status,user3@example.com,Bad Status User,Invalid status value,This record uses a status not in the allowed enum and should fail.,other,low,pending_review,,,,chat,,desktop
+cust-bad-source,user4@example.com,Bad Source User,Invalid metadata source,This record has a metadata source not in the allowed enum and should fail.,other,low,new,,,,telegram,,desktop

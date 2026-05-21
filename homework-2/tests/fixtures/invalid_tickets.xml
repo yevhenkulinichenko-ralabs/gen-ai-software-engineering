@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tickets>
+  <!-- Valid record — included to confirm partial success reporting -->
+  <ticket>
+    <customer_id>cust-valid</customer_id>
+    <customer_email>valid@example.com</customer_email>
+    <customer_name>Valid User</customer_name>
+    <subject>This record is valid</subject>
+    <description>This is a valid ticket to confirm partial success reporting works correctly.</description>
+    <category>other</category>
+    <priority>low</priority>
+    <status>new</status>
+    <metadata><source>api</source><device_type>desktop</device_type></metadata>
+  </ticket>
+
+  <!-- Invalid: malformed email address -->
+  <ticket>
+    <customer_id>cust-bad-email</customer_id>
+    <customer_email>not-an-email</customer_email>
+    <customer_name>Bad Email User</customer_name>
+    <subject>Invalid email address</subject>
+    <description>This record has a malformed email address and should fail validation.</description>
+    <category>other</category>
+    <priority>low</priority>
+    <metadata><source>api</source><device_type>desktop</device_type></metadata>
+  </ticket>
+
+  <!-- Invalid: missing required customer_email field -->
+  <ticket>
+    <customer_id>cust-missing-email</customer_id>
+    <customer_name>Missing Email User</customer_name>
+    <subject>Missing required customer_email field</subject>
+    <description>This record is missing the required customer_email field and should fail validation.</description>
+    <category>technical_issue</category>
+    <priority>medium</priority>
+    <metadata><source>web_form</source><device_type>mobile</device_type></metadata>
+  </ticket>
+
+  <!-- Invalid: category not in allowed enum -->
+  <ticket>
+    <customer_id>cust-bad-category</customer_id>
+    <customer_email>user@example.com</customer_email>
+    <customer_name>Bad Category User</customer_name>
+    <subject>Invalid category value</subject>
+    <description>This record uses a category that is not in the allowed enum list and should fail validation.</description>
+    <category>not_a_valid_category</category>
+    <priority>medium</priority>
+    <metadata><source>email</source><device_type>desktop</device_type></metadata>
+  </ticket>
+
+  <!-- Invalid: priority not in allowed enum -->
+  <ticket>
+    <customer_id>cust-bad-priority</customer_id>
+    <customer_email>user2@example.com</customer_email>
+    <customer_name>Bad Priority User</customer_name>
+    <subject>Invalid priority value</subject>
+    <description>This record uses a priority that is not in the allowed enum list and should fail validation.</description>
+    <category>other</category>
+    <priority>super_urgent</priority>
+    <metadata><source>email</source><device_type>tablet</device_type></metadata>
+  </ticket>
+
+  <!-- Invalid: metadata source not in allowed enum -->
+  <ticket>
+    <customer_id>cust-bad-source</customer_id>
+    <customer_email>user3@example.com</customer_email>
+    <customer_name>Bad Source User</customer_name>
+    <subject>Invalid metadata source value</subject>
+    <description>This record has a metadata source that is not in the allowed enum list and should fail validation.</description>
+    <category>other</category>
+    <priority>low</priority>
+    <metadata><source>telegram</source><device_type>desktop</device_type></metadata>
+  </ticket>
+
+  <!-- Invalid: missing required customer_id -->
+  <ticket>
+    <customer_email>user4@example.com</customer_email>
+    <customer_name>Missing ID User</customer_name>
+    <subject>Missing customer_id field</subject>
+    <description>This record is missing the required customer_id field and should fail validation entirely.</description>
+    <category>other</category>
+    <priority>low</priority>
+    <metadata><source>api</source><device_type>desktop</device_type></metadata>
+  </ticket>
+</tickets>

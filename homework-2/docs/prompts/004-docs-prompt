@@ -1,0 +1,36 @@
+Generate 5 documentation files for different audiences:
+
+1. README.md (Developers)
+
+Project overview and features
+Architecture diagram (Mermaid)
+Installation and setup instructions
+How to run tests
+Project structure
+
+2. API_REFERENCE.md (API Consumers)
+
+All endpoints with request/response examples
+Data models and schemas
+Error response formats
+cURL examples for each endpoint
+
+3. ARCHITECTURE.md (Technical Leads)
+
+High-level architecture diagram (Mermaid)
+Component descriptions
+Data flow diagrams (Mermaid sequence diagrams)
+Design decisions and trade-offs
+Security and performance considerations
+
+4. TESTING_GUIDE.md (QA Engineers)
+
+Test pyramid diagram (Mermaid)
+How to run tests
+Sample test data locations
+Manual testing checklist
+Performance benchmarks table
+Requirements:
+
+Use different AI models for different doc types
+Include at least 3 Mermaid diagrams across documents
