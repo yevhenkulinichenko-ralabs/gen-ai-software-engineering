@@ -16,7 +16,7 @@ The deliverables are:
 |------|---------|
 | `specification.md` | Layered product spec: objectives → policy → implementation notes → context → edge cases → verification → 15 low-level tasks |
 | `agents.md` | AI coding agent rules: domain constraints, code style, testing expectations, security defaults |
-| `CLAUDE.md` | Claude Code project rules: concise hard rules for the implementation session |
+| `CLAUDE.md` | Claude Code operational quick-reference: dev commands, environment setup, project gotchas |
 | `README.md` | This file |
 
 The implementation target stack is **Node.js + Express.js + Sequelize.js + PostgreSQL**, chosen for their ubiquity in FinTech backend services and strong Sequelize support for PostgreSQL-specific features (DECIMAL types, JSONB, row-level locking).
@@ -55,19 +55,19 @@ Card freeze and unfreeze can be triggered by mobile clients on unreliable networ
 
 | Practice | Where in Spec |
 |----------|--------------|
-| **PAN encryption at rest (AES-256-GCM)** | Implementation Notes § Security; Task 6 (encryptionService); `agents.md` Hard Rules; `CLAUDE.md` Hard Rules |
-| **CVV never stored** | Mid-Level Objective 5; Card Model (Task 3); Task 6; `agents.md` Domain Rules |
-| **PAN masked in all API responses** | Non-Functional § Privacy & Compliance; Card Model toJSON() (Task 3); `CLAUDE.md` Hard Rules |
+| **PAN encryption at rest (AES-256-GCM)** | Implementation Notes § Security; Task 6 (encryptionService); `agents.md` § Domain Rules (PAN and Sensitive Data) |
+| **CVV never stored** | Mid-Level Objective 5; Card Model (Task 3); Task 6; `agents.md` § Domain Rules |
+| **PAN masked in all API responses** | Non-Functional § Privacy & Compliance; Card Model toJSON() (Task 3); `agents.md` § Domain Rules |
 | **Immutable audit log** | Mid-Level Objective 4; Task 5 (AuditLog model — override update); Task 7 (auditService); `agents.md` § Audit Trail |
 | **7-year audit retention** | Non-Functional § Privacy & Compliance |
-| **Refresh token family rotation (compromise detection)** | Task 8 (jwt.js); Task 10 (refresh endpoint); `agents.md` § Security |
-| **Row-level locking for concurrent state transitions** | Non-Functional § Reliability; Task 11 (cardService); `agents.md` Edge Cases |
+| **Refresh token family rotation (compromise detection)** | Task 8 (jwt.js); Task 10 (refresh endpoint); `agents.md` § Security and Compliance Constraints |
+| **Row-level locking for concurrent state transitions** | Non-Functional § Reliability; Task 11 (cardService); `agents.md` § Edge Cases |
 | **Idempotency keys for write operations** | Mid-Level Objective 6; Implementation Notes § Idempotency; Tasks 9, 12, 13 |
-| **IDOR prevention via query-level ownership check** | Implementation Notes § Error Handling; Task 11 (getCardById); `agents.md` § Access Control; `CLAUDE.md` Hard Rules |
-| **Rate limiting with Redis backing** | Non-Functional § Rate Limiting; Task 9 (rateLimiter); `agents.md` |
+| **IDOR prevention via query-level ownership check** | Implementation Notes § Error Handling; Task 11 (getCardById); `agents.md` § Access Control |
+| **Rate limiting with Redis backing** | Non-Functional § Rate Limiting; Task 9 (rateLimiter); `agents.md` § Security and Compliance Constraints |
 | **GDPR tombstoning** | Non-Functional § Privacy & Compliance |
-| **No enumeration on 403 → 404** | Edge Cases table; `agents.md` § Access Control; `CLAUDE.md` Hard Rules |
-| **Bcrypt cost ≥ 12** | Implementation Notes § Security; Task 8; `agents.md`; `CLAUDE.md` |
-| **Decimal arithmetic for money** | Implementation Notes § Money Handling; `agents.md`; `CLAUDE.md` |
+| **No enumeration on 403 → 404** | Edge Cases table; `agents.md` § Access Control |
+| **Bcrypt cost ≥ 12** | Implementation Notes § Security; Task 8; `agents.md` § Security and Compliance Constraints |
+| **Decimal arithmetic for money** | Implementation Notes § Money Handling; `agents.md` § Money; `CLAUDE.md` § Money Arithmetic |
 | **Structured JSON logging (no PAN in logs)** | Implementation Notes § Technology Stack; `agents.md` § PAN and Sensitive Data |
-| **Coverage thresholds enforced in CI** | Verification § Test Categories; Task 1 (jest.config.js); `agents.md` § Testing |
+| **Coverage thresholds enforced in CI** | Verification § Test Categories; Task 1 (jest.config.js); `agents.md` § Testing; `CLAUDE.md` § Testing |
