@@ -24,7 +24,7 @@ npm install
 The three external MCP servers are declared in `.mcp.json` at the project root. Enable them in Claude Code from the project directory:
 
 ```bash
-# Enable all servers listed in .mcp.json
+# Enable all servers listed in .mcp.json (if needed)
 claude mcp enable github
 claude mcp enable filesystem
 claude mcp enable atlassian
