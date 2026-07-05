@@ -1,0 +1,31 @@
+{
+  "name": "homework-6",
+  "version": "1.0.0",
+  "description": "AI-powered transaction processing pipeline (Homework 6 capstone)",
+  "main": "orchestrator.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "pipeline": "node orchestrator.js",
+    "frontend": "node frontend/server.js",
+    "test": "jest --coverage",
+    "mcp": "node mcp/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "decimal.js": "^10.6.0",
+    "express": "^5.2.1",
+    "uuid": "^14.0.1",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "jest": "^30.4.2",
+    "supertest": "^7.2.2"
+  }
+}
