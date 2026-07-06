@@ -1,6 +1,8 @@
 # Transaction Processing Pipeline
 
-Created by Yevhen Kulinichenko
+**Student Name**: Yevhen Kulinichenko AAI02
+**Date Submitted**: 06.07.2026
+**AI Tools Used**: Claude Code
 
 ## What this is
 
