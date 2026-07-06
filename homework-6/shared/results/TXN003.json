@@ -1,0 +1,26 @@
+{
+  "message_id": "c52354ee-d1f0-4149-8c50-76ec5f72419e",
+  "timestamp": "2026-07-05T22:26:42.061Z",
+  "source_stage": "settlement",
+  "target_stage": "results",
+  "message_type": "transaction_result",
+  "data": {
+    "transaction_id": "TXN003",
+    "timestamp": "2026-03-16T09:30:00Z",
+    "source_account": "ACC-1003",
+    "destination_account": "ACC-9999",
+    "amount": "9999.99",
+    "currency": "USD",
+    "transaction_type": "transfer",
+    "description": "Consulting payment",
+    "metadata": {
+      "channel": "online",
+      "country": "US"
+    },
+    "status": "validated",
+    "risk_score": 0,
+    "risk_factors": [],
+    "settled_at": "2026-07-05T22:26:42.061Z",
+    "final_status": "settled"
+  }
+}

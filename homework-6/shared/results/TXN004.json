@@ -1,0 +1,29 @@
+{
+  "message_id": "e5623e49-37df-45af-86b3-a9da8f83106a",
+  "timestamp": "2026-07-05T22:26:42.065Z",
+  "source_stage": "settlement",
+  "target_stage": "results",
+  "message_type": "transaction_result",
+  "data": {
+    "transaction_id": "TXN004",
+    "timestamp": "2026-03-16T02:47:00Z",
+    "source_account": "ACC-1004",
+    "destination_account": "ACC-5500",
+    "amount": "500.00",
+    "currency": "EUR",
+    "transaction_type": "transfer",
+    "description": "Invoice #4471",
+    "metadata": {
+      "channel": "api",
+      "country": "DE"
+    },
+    "status": "reviewed",
+    "risk_score": 35,
+    "risk_factors": [
+      "unusual_timing",
+      "cross_border"
+    ],
+    "settled_at": "2026-07-05T22:26:42.065Z",
+    "final_status": "settled"
+  }
+}

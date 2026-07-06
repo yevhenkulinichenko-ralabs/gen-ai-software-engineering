@@ -1,0 +1,8 @@
+node_modules/
+coverage/
+.env
+
+shared/processing/*
+!shared/processing/.gitkeep
+shared/output/*
+!shared/output/.gitkeep

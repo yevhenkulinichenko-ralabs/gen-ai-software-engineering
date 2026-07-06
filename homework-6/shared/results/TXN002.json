@@ -1,0 +1,29 @@
+{
+  "message_id": "766df01a-b101-415c-bb51-b3cc07c02de3",
+  "timestamp": "2026-07-05T22:26:42.056Z",
+  "source_stage": "settlement",
+  "target_stage": "results",
+  "message_type": "transaction_result",
+  "data": {
+    "transaction_id": "TXN002",
+    "timestamp": "2026-03-16T09:15:00Z",
+    "source_account": "ACC-1002",
+    "destination_account": "ACC-3001",
+    "amount": "25000.00",
+    "currency": "USD",
+    "transaction_type": "wire_transfer",
+    "description": "Equipment purchase",
+    "metadata": {
+      "channel": "branch",
+      "country": "US"
+    },
+    "status": "reviewed",
+    "risk_score": 50,
+    "risk_factors": [
+      "high_value",
+      "wire_transfer"
+    ],
+    "settled_at": "2026-07-05T22:26:42.056Z",
+    "final_status": "settled"
+  }
+}

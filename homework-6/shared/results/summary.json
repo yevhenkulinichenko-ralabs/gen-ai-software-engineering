@@ -1,0 +1,41 @@
+{
+  "total": 8,
+  "settled": 6,
+  "rejected": 1,
+  "held_for_review": 1,
+  "transactions": [
+    {
+      "transaction_id": "TXN001",
+      "final_status": "settled"
+    },
+    {
+      "transaction_id": "TXN002",
+      "final_status": "settled"
+    },
+    {
+      "transaction_id": "TXN003",
+      "final_status": "settled"
+    },
+    {
+      "transaction_id": "TXN004",
+      "final_status": "settled"
+    },
+    {
+      "transaction_id": "TXN005",
+      "final_status": "held_for_review"
+    },
+    {
+      "transaction_id": "TXN006",
+      "final_status": "rejected",
+      "reason": "invalid_currency"
+    },
+    {
+      "transaction_id": "TXN007",
+      "final_status": "settled"
+    },
+    {
+      "transaction_id": "TXN008",
+      "final_status": "settled"
+    }
+  ]
+}

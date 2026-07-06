@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Transaction Processing Pipeline</title>
+<style>
+  :root {
+    color-scheme: light dark;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    color: #1a1a1a;
+    background: #fafafa;
+  }
+  h1 {
+    font-size: 1.5rem;
+  }
+  #run-btn {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  #run-btn:disabled {
+    background: #93c5fd;
+    cursor: default;
+  }
+  #status {
+    margin-top: 0.75rem;
+    font-style: italic;
+    color: #555;
+  }
+  .summary-cards {
+    display: flex;
+    gap: 1rem;
+    margin: 1.5rem 0;
+    flex-wrap: wrap;
+  }
+  .card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    text-align: center;
+    min-width: 110px;
+  }
+  .card .value {
+    font-size: 1.8rem;
+    font-weight: 700;
+  }
+  .card .label {
+    font-size: 0.85rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+  }
+  th, td {
+    text-align: left;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9rem;
+  }
+  th {
+    background: #f0f0f0;
+  }
+  .status-settled { color: #15803d; font-weight: 600; }
+  .status-rejected { color: #b91c1c; font-weight: 600; }
+  .status-held_for_review { color: #b45309; font-weight: 600; }
+</style>
+</head>
+<body>
+  <h1>Transaction Processing Pipeline</h1>
+  <p>Runs all sample transactions through validation, fraud detection, and settlement.</p>
+
+  <button id="run-btn">Run Pipeline</button>
+  <div id="status"></div>
+
+  <div class="summary-cards" id="summary-cards" style="display:none;">
+    <div class="card"><div class="value" id="card-total">-</div><div class="label">Total</div></div>
+    <div class="card"><div class="value" id="card-settled">-</div><div class="label">Settled</div></div>
+    <div class="card"><div class="value" id="card-rejected">-</div><div class="label">Rejected</div></div>
+    <div class="card"><div class="value" id="card-held">-</div><div class="label">Held for Review</div></div>
+  </div>
+
+  <table id="results-table" style="display:none;">
+    <thead>
+      <tr>
+        <th>Transaction ID</th>
+        <th>Final Status</th>
+        <th>Reason</th>
+      </tr>
+    </thead>
+    <tbody id="results-body"></tbody>
+  </table>
+
+  <script>
+    const runBtn = document.getElementById('run-btn');
+    const statusEl = document.getElementById('status');
+    const summaryCards = document.getElementById('summary-cards');
+    const resultsTable = document.getElementById('results-table');
+    const resultsBody = document.getElementById('results-body');
+
+    function renderSummary(summary) {
+      if (!summary) return;
+
+      document.getElementById('card-total').textContent = summary.total;
+      document.getElementById('card-settled').textContent = summary.settled;
+      document.getElementById('card-rejected').textContent = summary.rejected;
+      document.getElementById('card-held').textContent = summary.held_for_review;
+      summaryCards.style.display = 'flex';
+
+      resultsBody.innerHTML = '';
+      for (const t of summary.transactions) {
+        const tr = document.createElement('tr');
+        const statusClass = 'status-' + t.final_status;
+        tr.innerHTML =
+          '<td>' + t.transaction_id + '</td>' +
+          '<td class="' + statusClass + '">' + t.final_status + '</td>' +
+          '<td>' + (t.reason || '') + '</td>';
+        resultsBody.appendChild(tr);
+      }
+      resultsTable.style.display = 'table';
+    }
+
+    async function loadExistingResults() {
+      try {
+        const res = await fetch('/api/results');
+        const summary = await res.json();
+        if (summary) {
+          statusEl.textContent = 'Showing results from the most recent pipeline run.';
+          renderSummary(summary);
+        }
+      } catch (err) {
+        // No prior results available yet; ignore.
+      }
+    }
+
+    runBtn.addEventListener('click', async () => {
+      runBtn.disabled = true;
+      statusEl.textContent = 'Running pipeline...';
+      try {
+        const res = await fetch('/api/run-pipeline', { method: 'POST' });
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.message || 'Pipeline run failed');
+        }
+        const summary = await res.json();
+        statusEl.textContent = 'Pipeline run complete.';
+        renderSummary(summary);
+      } catch (err) {
+        statusEl.textContent = 'Error: ' + err.message;
+      } finally {
+        runBtn.disabled = false;
+      }
+    });
+
+    loadExistingResults();
+  </script>
+</body>
+</html>
