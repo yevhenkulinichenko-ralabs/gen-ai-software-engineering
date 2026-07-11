@@ -1,0 +1,26 @@
+[
+  {
+    "customer_id": "cust-001",
+    "customer_email": "alice@example.com",
+    "customer_name": "Alice Smith",
+    "subject": "Cannot login to my account",
+    "description": "I forgot my password and cannot access my account since yesterday morning.",
+    "category": "account_access",
+    "priority": "high",
+    "status": "new",
+    "tags": ["login", "access"],
+    "metadata": { "source": "web_form", "browser": "Chrome", "device_type": "desktop" }
+  },
+  {
+    "customer_id": "cust-002",
+    "customer_email": "bob@example.com",
+    "customer_name": "Bob Jones",
+    "subject": "Payment failed on checkout",
+    "description": "I tried to complete my purchase but the payment system keeps failing with an error.",
+    "category": "billing_question",
+    "priority": "medium",
+    "status": "new",
+    "tags": ["payment"],
+    "metadata": { "source": "api", "device_type": "mobile" }
+  }
+]

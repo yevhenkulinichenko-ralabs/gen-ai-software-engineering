@@ -1,0 +1,81 @@
+[
+  {
+    "customer_id": "cust-valid",
+    "customer_email": "valid@example.com",
+    "customer_name": "Valid User",
+    "subject": "This record is valid",
+    "description": "This is a valid ticket included to confirm partial success reporting works correctly.",
+    "category": "other",
+    "priority": "low",
+    "metadata": { "source": "api", "device_type": "desktop" }
+  },
+  {
+    "customer_id": "cust-bad-email",
+    "customer_email": "not-an-email",
+    "customer_name": "Bad Email User",
+    "subject": "Invalid email address",
+    "description": "This record has a malformed email address and should fail validation.",
+    "category": "other",
+    "priority": "low",
+    "metadata": { "source": "api", "device_type": "desktop" }
+  },
+  {
+    "customer_id": "cust-missing-email",
+    "customer_name": "Missing Email User",
+    "subject": "Missing required field: customer_email",
+    "description": "This record is missing the required customer_email field and should fail validation.",
+    "category": "technical_issue",
+    "priority": "medium",
+    "metadata": { "source": "web_form", "device_type": "mobile" }
+  },
+  {
+    "customer_id": "cust-bad-category",
+    "customer_email": "user@example.com",
+    "customer_name": "Bad Category User",
+    "subject": "Invalid category value",
+    "description": "This record uses a category that is not in the allowed enum list and should fail validation.",
+    "category": "not_a_valid_category",
+    "priority": "medium",
+    "metadata": { "source": "email", "device_type": "desktop" }
+  },
+  {
+    "customer_id": "cust-bad-priority",
+    "customer_email": "user2@example.com",
+    "customer_name": "Bad Priority User",
+    "subject": "Invalid priority value",
+    "description": "This record uses a priority that is not in the allowed enum list and should fail validation.",
+    "category": "other",
+    "priority": "super_urgent",
+    "metadata": { "source": "email", "device_type": "tablet" }
+  },
+  {
+    "customer_id": "cust-bad-status",
+    "customer_email": "user3@example.com",
+    "customer_name": "Bad Status User",
+    "subject": "Invalid status value",
+    "description": "This record uses a status value that is not in the allowed enum and should fail validation.",
+    "category": "other",
+    "priority": "low",
+    "status": "pending_review",
+    "metadata": { "source": "chat", "device_type": "desktop" }
+  },
+  {
+    "customer_id": "cust-bad-metadata-source",
+    "customer_email": "user4@example.com",
+    "customer_name": "Bad Source User",
+    "subject": "Invalid metadata source value",
+    "description": "This record has a metadata source that is not in the allowed enum and should fail validation.",
+    "category": "other",
+    "priority": "low",
+    "metadata": { "source": "telegram", "device_type": "desktop" }
+  },
+  {
+    "customer_email": "user5@example.com",
+    "customer_name": "Missing ID User",
+    "subject": "Missing customer_id",
+    "description": "This record is missing the required customer_id field and should fail validation.",
+    "category": "other",
+    "priority": "low",
+    "metadata": { "source": "api", "device_type": "desktop" }
+  }
+]

@@ -1,0 +1,3 @@
+customer_id,customer_email,customer_name,subject,description,category,priority,status,tags,assigned_to,resolved_at,metadata_source,metadata_browser,metadata_device_type
+cust-001,alice@example.com,Alice Smith,Cannot login to my account,I forgot my password and cannot access my account since yesterday morning.,account_access,high,new,login|access,,,web_form,Chrome,desktop
+cust-002,bob@example.com,Bob Jones,Payment failed on checkout,I tried to complete my purchase but the payment system keeps failing with an error.,billing_question,medium,new,payment,,,api,,mobile

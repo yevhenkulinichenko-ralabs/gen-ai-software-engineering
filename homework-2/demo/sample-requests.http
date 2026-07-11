@@ -1,0 +1,466 @@
+@baseUrl = http://localhost:3000
+
+
+# ════════════════════════════════════════════════════════════════════════════
+# TICKET CREATION
+# ════════════════════════════════════════════════════════════════════════════
+
+### Create a ticket with explicit category and priority (all optional fields included)
+# @name createMain
+POST {{baseUrl}}/tickets
+Content-Type: application/json
+
+{
+  "customer_id": "cust-001",
+  "customer_email": "alice@example.com",
+  "customer_name": "Alice Smith",
+  "subject": "Cannot login to my account",
+  "description": "I forgot my password and cannot access my account since yesterday morning.",
+  "category": "account_access",
+  "priority": "high",
+  "status": "new",
+  "tags": ["login", "password"],
+  "assigned_to": null,
+  "metadata": {
+    "source": "web_form",
+    "browser": "Chrome 120",
+    "device_type": "desktop"
+  }
+}
+
+###
+
+### Create a ticket with only the required fields (status, tags default automatically)
+POST {{baseUrl}}/tickets
+Content-Type: application/json
+
+{
+  "customer_id": "cust-002",
+  "customer_email": "bob@example.com",
+  "customer_name": "Bob Jones",
+  "subject": "Invoice shows incorrect charge",
+  "description": "My latest invoice shows a charge for a subscription plan I never signed up for.",
+  "category": "billing_question",
+  "priority": "medium",
+  "metadata": { "source": "email", "device_type": "mobile" }
+}
+
+###
+
+### Create a ticket with auto_classify — system assigns category and priority from subject/description
+# @name createAutoClassify
+POST {{baseUrl}}/tickets
+Content-Type: application/json
+
+{
+  "customer_id": "cust-003",
+  "customer_email": "carol@example.com",
+  "customer_name": "Carol White",
+  "subject": "Application crashes on startup",
+  "description": "The application throws an exception and crashes every time I try to open it. Error appears in console.",
+  "auto_classify": true,
+  "metadata": { "source": "api", "device_type": "desktop" }
+}
+
+###
+
+### Create a ticket for the delete demo
+# @name createForDelete
+POST {{baseUrl}}/tickets
+Content-Type: application/json
+
+{
+  "customer_id": "cust-004",
+  "customer_email": "dave@example.com",
+  "customer_name": "Dave Brown",
+  "subject": "Minor cosmetic misalignment on settings page",
+  "description": "There is a small cosmetic issue with button alignment on the settings page. Nice to have fix eventually.",
+  "category": "bug_report",
+  "priority": "low",
+  "metadata": { "source": "chat", "device_type": "desktop" }
+}
+
+###
+
+### Error: auto_classify: true with category provided → 400
+POST {{baseUrl}}/tickets
+Content-Type: application/json
+
+{
+  "customer_id": "cust-err-1",
+  "customer_email": "err@example.com",
+  "customer_name": "Error User",
+  "subject": "Test error case",
+  "description": "This request should fail because auto_classify and category are mutually exclusive.",
+  "auto_classify": true,
+  "category": "other",
+  "metadata": { "source": "api", "device_type": "desktop" }
+}
+
+###
+
+### Error: missing required field customer_email → 400
+POST {{baseUrl}}/tickets
+Content-Type: application/json
+
+{
+  "customer_id": "cust-err-2",
+  "customer_name": "Error User",
+  "subject": "Missing email",
+  "description": "This request is missing the required customer_email field and should fail validation.",
+  "category": "other",
+  "priority": "low",
+  "metadata": { "source": "api", "device_type": "desktop" }
+}
+
+###
+
+### Error: invalid enum value for priority → 400
+POST {{baseUrl}}/tickets
+Content-Type: application/json
+
+{
+  "customer_id": "cust-err-3",
+  "customer_email": "err3@example.com",
+  "customer_name": "Error User",
+  "subject": "Invalid priority",
+  "description": "This request uses a priority value that is not in the allowed enum list.",
+  "category": "other",
+  "priority": "super_urgent",
+  "metadata": { "source": "api", "device_type": "desktop" }
+}
+
+
+# ════════════════════════════════════════════════════════════════════════════
+# LIST AND FILTER
+# ════════════════════════════════════════════════════════════════════════════
+
+### List all tickets
+GET {{baseUrl}}/tickets
+
+###
+
+### Filter by status
+GET {{baseUrl}}/tickets?status=new
+
+###
+
+### Filter by category
+GET {{baseUrl}}/tickets?category=billing_question
+
+###
+
+### Filter by priority
+GET {{baseUrl}}/tickets?priority=high
+
+###
+
+### Combined filter: category AND priority (AND semantics)
+GET {{baseUrl}}/tickets?category=account_access&priority=high
+
+###
+
+### Filter by assigned agent
+GET {{baseUrl}}/tickets?assigned_to=agent-42
+
+###
+
+### Filter by customer
+GET {{baseUrl}}/tickets?customer_id=cust-001
+
+###
+
+### Filter that returns no results
+GET {{baseUrl}}/tickets?category=feature_request&priority=urgent
+
+
+# ════════════════════════════════════════════════════════════════════════════
+# GET SINGLE TICKET
+# ════════════════════════════════════════════════════════════════════════════
+
+### Get the ticket created in the first request
+GET {{baseUrl}}/tickets/{{createMain.response.body.id}}
+
+###
+
+### Get non-existent ticket → 404
+GET {{baseUrl}}/tickets/00000000-0000-0000-0000-000000000000
+
+
+# ════════════════════════════════════════════════════════════════════════════
+# UPDATE TICKET
+# ════════════════════════════════════════════════════════════════════════════
+
+### Update status only — does NOT set classification_overridden
+PUT {{baseUrl}}/tickets/{{createMain.response.body.id}}
+Content-Type: application/json
+
+{
+  "status": "in_progress"
+}
+
+###
+
+### Update category — changes from current value, sets classification_overridden: true
+PUT {{baseUrl}}/tickets/{{createMain.response.body.id}}
+Content-Type: application/json
+
+{
+  "category": "technical_issue"
+}
+
+###
+
+### Assign ticket to an agent
+PUT {{baseUrl}}/tickets/{{createMain.response.body.id}}
+Content-Type: application/json
+
+{
+  "assigned_to": "agent-42",
+  "status": "in_progress"
+}
+
+###
+
+### Resolve a ticket — set status, assigned_to, and resolved_at together
+PUT {{baseUrl}}/tickets/{{createMain.response.body.id}}
+Content-Type: application/json
+
+{
+  "status": "resolved",
+  "assigned_to": "agent-42",
+  "resolved_at": "2024-01-15T14:00:00.000Z"
+}
+
+###
+
+### Update tags and metadata
+PUT {{baseUrl}}/tickets/{{createMain.response.body.id}}
+Content-Type: application/json
+
+{
+  "tags": ["login", "password", "2fa"],
+  "metadata": { "source": "web_form", "browser": "Firefox 121", "device_type": "desktop" }
+}
+
+###
+
+### Error: empty body (at least one field required) → 400
+PUT {{baseUrl}}/tickets/{{createMain.response.body.id}}
+Content-Type: application/json
+
+{}
+
+###
+
+### Error: invalid status value → 400
+PUT {{baseUrl}}/tickets/{{createMain.response.body.id}}
+Content-Type: application/json
+
+{
+  "status": "pending_review"
+}
+
+###
+
+### Update non-existent ticket → 404
+PUT {{baseUrl}}/tickets/00000000-0000-0000-0000-000000000000
+Content-Type: application/json
+
+{
+  "status": "in_progress"
+}
+
+
+# ════════════════════════════════════════════════════════════════════════════
+# AUTO-CLASSIFY
+# ════════════════════════════════════════════════════════════════════════════
+
+### Run auto-classify on the manually-created ticket
+# Returns: category, priority, confidence, reasoning, keywords_found
+# Also updates those fields on the ticket in place
+POST {{baseUrl}}/tickets/{{createMain.response.body.id}}/auto-classify
+
+###
+
+### Verify classification is now stored on the ticket (check classification.classified_at)
+GET {{baseUrl}}/tickets/{{createMain.response.body.id}}
+
+###
+
+### Run auto-classify on the ticket created with auto_classify: true (re-classify)
+POST {{baseUrl}}/tickets/{{createAutoClassify.response.body.id}}/auto-classify
+
+###
+
+### Auto-classify non-existent ticket → 404
+POST {{baseUrl}}/tickets/00000000-0000-0000-0000-000000000000/auto-classify
+
+
+# ════════════════════════════════════════════════════════════════════════════
+# BATCH IMPORT
+# ════════════════════════════════════════════════════════════════════════════
+
+### Import a JSON array — all valid records
+POST {{baseUrl}}/tickets/import
+Content-Type: application/json
+
+[
+  {
+    "customer_id": "imp-001",
+    "customer_email": "import1@example.com",
+    "customer_name": "Import User One",
+    "subject": "Cannot login to my account",
+    "description": "Forgot my password and cannot access the account since the update.",
+    "category": "account_access",
+    "priority": "high",
+    "metadata": { "source": "web_form", "device_type": "desktop" }
+  },
+  {
+    "customer_id": "imp-002",
+    "customer_email": "import2@example.com",
+    "customer_name": "Import User Two",
+    "subject": "Production system is down",
+    "description": "Critical outage — production is down and all users are affected.",
+    "category": "technical_issue",
+    "priority": "urgent",
+    "tags": ["outage", "production"],
+    "metadata": { "source": "api", "device_type": "desktop" }
+  },
+  {
+    "customer_id": "imp-003",
+    "customer_email": "import3@example.com",
+    "customer_name": "Import User Three",
+    "subject": "Request for dark mode feature",
+    "description": "I would like to suggest adding dark mode. It would improve usability significantly.",
+    "category": "feature_request",
+    "priority": "low",
+    "metadata": { "source": "email", "device_type": "mobile" }
+  }
+]
+
+###
+
+### Import JSON with mixed valid and invalid records — partial success response
+POST {{baseUrl}}/tickets/import
+Content-Type: application/json
+
+[
+  {
+    "customer_id": "mix-001",
+    "customer_email": "valid@example.com",
+    "customer_name": "Valid User",
+    "subject": "This record is valid",
+    "description": "This is a valid ticket that should be imported successfully.",
+    "category": "other",
+    "priority": "low",
+    "metadata": { "source": "api", "device_type": "desktop" }
+  },
+  {
+    "customer_id": "mix-002",
+    "customer_email": "not-an-email",
+    "customer_name": "Bad Email User",
+    "subject": "Invalid email address",
+    "description": "This record has a malformed email and should appear in the failed list.",
+    "category": "other",
+    "priority": "low",
+    "metadata": { "source": "api", "device_type": "desktop" }
+  },
+  {
+    "customer_id": "mix-003",
+    "customer_name": "Missing Email User",
+    "subject": "Missing required field",
+    "description": "This record is missing the required customer_email field.",
+    "category": "technical_issue",
+    "priority": "medium",
+    "metadata": { "source": "web_form", "device_type": "mobile" }
+  }
+]
+
+###
+
+### Import CSV — pipe-separated tags, flat metadata_* columns
+POST {{baseUrl}}/tickets/import
+Content-Type: text/csv
+
+customer_id,customer_email,customer_name,subject,description,category,priority,status,tags,assigned_to,resolved_at,metadata_source,metadata_browser,metadata_device_type
+csv-001,alice@example.com,Alice CSV,Application error on login,Getting an error message when trying to log in after the latest update.,technical_issue,high,new,login|error,,,web_form,Chrome,desktop
+csv-002,bob@example.com,Bob CSV,Billing charge question,I have a question about the charge on my last invoice and whether a refund is possible.,billing_question,medium,new,,,,email,,mobile
+csv-003,carol@example.com,Carol CSV,Feature request for export,I would like to suggest adding a CSV export feature to improve reporting.,feature_request,low,new,export|feature,,,api,,desktop
+
+###
+
+### Import XML — root <tickets> with <ticket> children, tags under <tags><tag>
+POST {{baseUrl}}/tickets/import
+Content-Type: application/xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<tickets>
+  <ticket>
+    <customer_id>xml-001</customer_id>
+    <customer_email>alice@example.com</customer_email>
+    <customer_name>Alice XML</customer_name>
+    <subject>Cannot access my account after password reset</subject>
+    <description>I reset my password but still cannot sign in to my account. The access is completely locked.</description>
+    <category>account_access</category>
+    <priority>high</priority>
+    <status>new</status>
+    <tags><tag>login</tag><tag>password</tag></tags>
+    <metadata><source>web_form</source><device_type>desktop</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>xml-002</customer_id>
+    <customer_email>bob@example.com</customer_email>
+    <customer_name>Bob XML</customer_name>
+    <subject>Unexpected subscription charge on invoice</subject>
+    <description>My invoice shows a charge for a subscription tier I never selected. Requesting a refund for the difference.</description>
+    <category>billing_question</category>
+    <priority>medium</priority>
+    <status>new</status>
+    <metadata><source>email</source><device_type>mobile</device_type></metadata>
+  </ticket>
+  <ticket>
+    <customer_id>xml-003</customer_id>
+    <customer_email>carol@example.com</customer_email>
+    <customer_name>Carol XML</customer_name>
+    <subject>Defect in search results — steps to reproduce included</subject>
+    <description>Found a regression in search. Steps to reproduce: enter a query, press enter, actual behavior shows empty results, expected behavior shows matching results.</description>
+    <category>bug_report</category>
+    <priority>high</priority>
+    <status>new</status>
+    <metadata><source>api</source><device_type>desktop</device_type></metadata>
+  </ticket>
+</tickets>
+
+###
+
+### Import using demo sample files (run from project root with curl)
+# curl -X POST http://localhost:3000/tickets/import -H "Content-Type: application/json" --data-binary @demo/sample_tickets.json
+# curl -X POST http://localhost:3000/tickets/import -H "Content-Type: text/csv"         --data-binary @demo/sample_tickets.csv
+# curl -X POST http://localhost:3000/tickets/import -H "Content-Type: application/xml"  --data-binary @demo/sample_tickets.xml
+
+###
+
+### Error: unsupported Content-Type → 400
+POST {{baseUrl}}/tickets/import
+Content-Type: text/plain
+
+this is not a supported format
+
+
+# ════════════════════════════════════════════════════════════════════════════
+# DELETE TICKET
+# ════════════════════════════════════════════════════════════════════════════
+
+### Delete the ticket created for this purpose → 204 No Content
+DELETE {{baseUrl}}/tickets/{{createForDelete.response.body.id}}
+
+###
+
+### Confirm the ticket is gone → 404
+GET {{baseUrl}}/tickets/{{createForDelete.response.body.id}}
+
+###
+
+### Delete non-existent ticket → 404
+DELETE {{baseUrl}}/tickets/00000000-0000-0000-0000-000000000000
